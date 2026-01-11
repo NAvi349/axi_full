@@ -169,7 +169,8 @@ class axi_write_read_sequence extends uvm_sequence #(axi_transaction);
     axi_write_read_trans.axi_req_i.aw.len  = 'h0; 
     axi_write_read_trans.axi_req_i.aw.id   = 'h0;
     axi_write_read_trans.axi_req_i.aw.addr = 'h04; 
-    axi_write_read_trans.axi_req_i.aw.size = 'h2;    
+    axi_write_read_trans.axi_req_i.aw.size = 'h2;
+    axi_write_read_trans.axi_req_i.aw.burst = 'b0;
 	axi_write_read_trans.axi_req_i.w.data  = 32'h00000301;
     axi_write_read_trans.axi_req_i.w.strb  = 4'b1111;
     axi_write_read_trans.axi_req_i.w.last  = 1'b1;
@@ -185,7 +186,7 @@ class axi_write_read_sequence extends uvm_sequence #(axi_transaction);
     axi_write_read_trans.axi_req_i.ar.len = 'h0;
 	axi_write_read_trans.axi_req_i.ar.id = 'h0;
 	axi_write_read_trans.axi_req_i.ar.size = 'h2;
-
+	axi_write_read_trans.axi_req_i.ar.burst = 'h00;
     axi_write_read_trans.READ_WRITE = 'b0;
     finish_item(axi_write_read_trans);
 
