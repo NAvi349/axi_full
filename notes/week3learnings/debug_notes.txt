@@ -1,0 +1,16 @@
+1. axi_to_mem is a bridge from AXI to memory model
+
+2. For AXI full set len = 0, last = 1 for single burst transactions
+
+Use axi_sim_mem if want to have actual memory
+
+For proper write read in AXI full, properly config the below parts:
+1. AXI size,
+2. AXI len,
+3. AXI strobe
+
+Driver address phase and data phase seperately ---> to properly implement burst transaction
+
+Drop valid as soon as ready is asserted from the slave. Otherwise duplicate drives will be there --> This caused beat mismatch
+
+In monitor with input and output monitor, don't mix the signals from one monitor to other as it will create race condition.

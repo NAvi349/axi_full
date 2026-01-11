@@ -1,0 +1,16 @@
+Building environment:
+
+1. Interface can never be part of a package.
+2. struct types cannot be used in clocking blocks. Only simple datatypes be used in clocking blocks. Just use vif.clock for struct types.
+3. Before importing a package make sure it compiled.
+
+TLM connection from monitor to scoreboard:
+Implementation port is the termination of the TLM graph.
+Always check if the handles are built properly before accessing. Use NULL checks if needed
+
+
+Use write method for the termination in the scoreboard for the TLM connection from the monitor. Use decl_type for seperate write tasks for the TLM connections. Write the data
+to the FIFO.
+
+Specify the parameter for the uvm driver, uvm_sequencer otherwise you will observe connect phase issues.
+

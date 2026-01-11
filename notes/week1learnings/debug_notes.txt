@@ -1,0 +1,9 @@
+1. Reads returning value zero:
+
+In design they write only if     (axi_req_i.aw_valid && axi_req_i.w_valid && b_ready) is true. So have to assert this at the beginning of write transaction otherwise the write won't go through.
+
+Also before always drive the payload before asserting the valid signals from the master AXI agent.
+
+De-assert valid the next cycle after receiving ready.
+
+Also ar_valid should be held HIGH till read data is obtained for this design.

@@ -1,0 +1,1256 @@
+# do compile_axi_full.tcl
+# ** Warning: (vlib-34) Library already exists at "uvm".
+# Errors: 0, Warnings: 1
+# QuestaSim vmap 2024.3 Lib Mapping Utility 2024.09 Sep 10 2024
+# vmap uvm uvm 
+# Modifying modelsim.ini
+# /home/users/i77031/Work/AXI_full/axi
+# /home/users/i77031/Work/AXI_full/common_cells
+# /home/users/i77031/Work/AXI_full/uvm
+# /home/users/i77031/Work/AXI_full/tb
+# /home/users/i77031/Work/AXI_full/filelists/common_cells.f
+# /home/users/i77031/Work/AXI_full/filelists/axi_levels.f
+# axi_full_uvm_tb_top
+# /home/users/i77031/Work/AXI_full/tb/axi_full_uvm_tb_top.sv
+# +incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb
+# QuestaSim vmap 2024.3 Lib Mapping Utility 2024.09 Sep 10 2024
+# vmap work work 
+# Modifying modelsim.ini
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:49 on Jan 11,2026
+# vlog -sv -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" -f /home/users/i77031/Work/AXI_full/filelists/common_cells.f 
+# -- Compiling package cf_math_pkg
+# -- Compiling package ecc_pkg
+# -- Compiling package cb_filter_pkg
+# -- Compiling package cdc_reset_ctrlr_pkg
+# -- Compiling module binary_to_gray
+# -- Compiling module gray_to_binary
+# -- Compiling module onehot_to_bin
+# -- Compiling module popcount
+# -- Compiling module lzc
+# -- Importing package cf_math_pkg
+# -- Compiling module counter
+# -- Compiling module delta_counter
+# -- Compiling module max_counter
+# -- Compiling module rstgen
+# -- Compiling module rstgen_bypass
+# -- Compiling module ecc_encode
+# -- Importing package ecc_pkg
+# -- Compiling module ecc_decode
+# -- Compiling module cc_onehot
+# -- Compiling module edge_detect
+# -- Compiling module edge_propagator
+# -- Compiling module edge_propagator_ack
+# -- Compiling module edge_propagator_tx
+# -- Compiling module edge_propagator_rx
+# -- Compiling module exp_backoff
+# -- Compiling module fall_through_register
+# -- Compiling module id_queue
+# ** Warning: /home/users/i77031/Work/AXI_adv/common_cells/src/id_queue.sv(193): (vlog-2623) Undefined variable: empty.
+# -- Compiling module mv_filter
+# -- Compiling module plru_tree
+# -- Compiling module serial_deglitch
+# -- Compiling module unread
+# -- Compiling module lfsr
+# -- Compiling module lfsr_8bit
+# -- Compiling module lfsr_16bit
+# -- Compiling module sub_per_hash
+# -- Compiling module clk_div
+# -- Compiling module addr_decode
+# -- Compiling module addr_decode_napot
+# -- Compiling module addr_decode_dync
+# -- Compiling module multiaddr_decode
+# -- Compiling module fifo_v3
+# -- Compiling interface STREAM_DV
+# ** Warning: (vlog-13361) /home/users/i77031/Work/AXI_adv/common_cells/src/stream_intf.sv(46): No trigger event inferred in disable expression.
+# ** Warning: (vlog-13361) /home/users/i77031/Work/AXI_adv/common_cells/src/stream_intf.sv(47): No trigger event inferred in disable expression.
+# -- Compiling module spill_register_flushable
+# -- Compiling module spill_register
+# -- Compiling module stream_register
+# -- Compiling module stream_fifo
+# -- Compiling module passthrough_stream_fifo
+# -- Compiling module stream_delay
+# -- Compiling module stream_filter
+# -- Compiling module stream_fork
+# -- Compiling module stream_fork_dynamic
+# -- Compiling module stream_join_dynamic
+# -- Compiling module stream_join
+# -- Compiling module stream_mux
+# -- Compiling module stream_demux
+# -- Compiling module stream_arbiter
+# -- Compiling module stream_arbiter_flushable
+# -- Compiling module stream_xbar
+# -- Compiling module stream_omega_net
+# -- Compiling module stream_to_mem
+# -- Compiling module isochronous_4phase_handshake
+# -- Compiling module sync
+# -- Compiling module sync_wedge
+# -- Compiling module cdc_2phase
+# -- Compiling module cdc_2phase_src
+# -- Compiling module cdc_2phase_dst
+# -- Compiling module cdc_2phase_clearable
+# -- Compiling module cdc_2phase_src_clearable
+# -- Compiling module cdc_2phase_dst_clearable
+# -- Compiling module cdc_fifo_2phase
+# -- Compiling module cdc_fifo_gray
+# -- Compiling module cdc_fifo_gray_src
+# -- Compiling module cdc_fifo_gray_dst
+# -- Compiling module cdc_fifo_gray_clearable
+# -- Compiling module cdc_fifo_gray_src_clearable
+# -- Compiling module cdc_fifo_gray_dst_clearable
+# -- Compiling module cdc_reset_ctrlr
+# -- Importing package cdc_reset_ctrlr_pkg
+# -- Compiling module cdc_reset_ctrlr_half
+# 
+# Top level modules:
+# 	popcount
+# 	max_counter
+# 	rstgen
+# 	ecc_encode
+# 	ecc_decode
+# 	cc_onehot
+# 	edge_detect
+# 	edge_propagator
+# 	edge_propagator_tx
+# 	edge_propagator_rx
+# 	exp_backoff
+# 	fall_through_register
+# 	id_queue
+# 	mv_filter
+# 	plru_tree
+# 	serial_deglitch
+# 	unread
+# 	lfsr
+# 	lfsr_8bit
+# 	sub_per_hash
+# 	clk_div
+# 	addr_decode
+# 	addr_decode_napot
+# 	multiaddr_decode
+# 	stream_register
+# 	passthrough_stream_fifo
+# 	stream_delay
+# 	stream_filter
+# 	stream_fork_dynamic
+# 	stream_join
+# 	stream_mux
+# 	stream_arbiter
+# 	stream_omega_net
+# 	stream_to_mem
+# 	isochronous_4phase_handshake
+# 	cdc_2phase_clearable
+# 	cdc_fifo_2phase
+# 	cdc_fifo_gray
+# 	cdc_fifo_gray_clearable
+# End time: 18:14:49 on Jan 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 3
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:49 on Jan 11,2026
+# vlog -sv -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" -f /home/users/i77031/Work/AXI_full/filelists/axi_levels.f 
+# -- Compiling package axi_pkg
+# -- Compiling interface AXI_BUS
+# -- Importing package axi_pkg
+# -- Compiling interface AXI_BUS_DV
+# -- Compiling interface AXI_BUS_ASYNC
+# -- Compiling interface AXI_BUS_ASYNC_GRAY
+# -- Compiling interface AXI_LITE
+# -- Compiling interface AXI_LITE_DV
+# -- Compiling interface AXI_LITE_ASYNC_GRAY
+# -- Compiling module axi_atop_filter
+# -- Compiling module axi_atop_filter_intf
+# -- Compiling module axi_burst_splitter
+# -- Compiling module axi_cdc_dst
+# -- Compiling module axi_cdc_dst_intf
+# -- Compiling module axi_lite_cdc_dst_intf
+# -- Compiling module axi_cdc_src
+# -- Compiling module axi_cdc_src_intf
+# -- Compiling module axi_lite_cdc_src_intf
+# -- Compiling module axi_cut
+# -- Compiling module axi_cut_intf
+# -- Compiling module axi_lite_cut_intf
+# -- Compiling module axi_delayer
+# -- Compiling module axi_delayer_intf
+# -- Compiling module axi_demux
+# -- Compiling module axi_demux_intf
+# -- Compiling module axi_dw_downsizer
+# -- Importing package cf_math_pkg
+# -- Compiling module axi_dw_upsizer
+# -- Compiling module axi_id_remap
+# -- Compiling module axi_id_remap_table
+# -- Compiling module axi_id_remap_intf
+# -- Compiling module axi_id_prepend
+# -- Compiling module axi_isolate
+# -- Compiling module axi_isolate_inner
+# -- Compiling module axi_isolate_intf
+# -- Compiling module axi_join_intf
+# -- Compiling module axi_lite_demux
+# -- Compiling module axi_lite_demux_intf
+# -- Compiling module axi_lite_join_intf
+# -- Compiling module axi_lite_mailbox
+# -- Compiling module axi_lite_mailbox_slave
+# -- Compiling module axi_lite_mailbox_intf
+# -- Compiling module axi_lite_mux
+# -- Compiling module axi_lite_mux_intf
+# -- Compiling module axi_lite_regs
+# -- Compiling module axi_lite_regs_intf
+# -- Compiling module axi_lite_to_apb
+# -- Compiling module axi_lite_to_apb_intf
+# -- Compiling module axi_lite_to_axi
+# -- Compiling module axi_lite_to_axi_intf
+# -- Compiling module axi_modify_address
+# -- Compiling module axi_modify_address_intf
+# -- Compiling module axi_mux
+# -- Compiling module axi_mux_intf
+# -- Compiling module axi_serializer
+# -- Compiling module axi_serializer_intf
+# -- Compiling module axi_to_detailed_mem
+# -- Compiling module axi_to_detailed_mem_intf
+# -- Compiling module mem_stream_to_banks_detailed
+# -- Compiling module axi_cdc
+# -- Compiling module axi_cdc_intf
+# -- Compiling module axi_lite_cdc_intf
+# -- Compiling module axi_err_slv
+# -- Compiling module axi_dw_converter
+# -- Compiling module axi_dw_converter_intf
+# -- Compiling module axi_id_serialize
+# -- Compiling module axi_id_serialize_intf
+# -- Compiling module axi_multicut
+# -- Compiling module axi_multicut_intf
+# -- Compiling module axi_lite_multicut_intf
+# -- Compiling module axi_to_axi_lite
+# -- Compiling module axi_to_axi_lite_id_reflect
+# -- Compiling module axi_to_axi_lite_intf
+# -- Compiling module axi_iw_converter
+# -- Compiling module axi_iw_converter_intf
+# -- Compiling module axi_lite_xbar
+# ** Warning: /home/users/i77031/Work/AXI_adv/axi/src/axi_lite_xbar.sv(44): (vlog-13314) Defaulting port 'default_mst_port_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# -- Compiling module axi_lite_xbar_intf
+# ** Warning: /home/users/i77031/Work/AXI_adv/axi/src/axi_lite_xbar.sv(253): (vlog-13314) Defaulting port 'default_mst_port_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# -- Compiling module axi_xbar
+# ** Warning: /home/users/i77031/Work/AXI_adv/axi/src/axi_xbar.sv(90): (vlog-13314) Defaulting port 'default_mst_port_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# -- Compiling module axi_xbar_intf
+# ** Warning: /home/users/i77031/Work/AXI_adv/axi/src/axi_xbar.sv(192): (vlog-13314) Defaulting port 'default_mst_port_i' kind to 'var' rather than 'wire' due to default compile option setting of -svinputport=relaxed.
+# -- Compiling module axi_lite_from_mem
+# -- Compiling module axi_to_mem
+# -- Compiling module axi_to_mem_intf
+# -- Compiling module axi_sim_mem
+# -- Compiling module axi_sim_mem_intf
+# -- Compiling module axi_sim_mem_multiport_intf
+# 
+# Top level modules:
+# 	axi_atop_filter_intf
+# 	axi_cdc_dst_intf
+# 	axi_lite_cdc_dst_intf
+# 	axi_cdc_src_intf
+# 	axi_lite_cdc_src_intf
+# 	axi_cut_intf
+# 	axi_lite_cut_intf
+# 	axi_delayer_intf
+# 	axi_demux_intf
+# 	axi_id_remap_intf
+# 	axi_isolate_intf
+# 	axi_join_intf
+# 	axi_lite_demux_intf
+# 	axi_lite_join_intf
+# 	axi_lite_mailbox_intf
+# 	axi_lite_mux_intf
+# 	axi_lite_regs_intf
+# 	axi_lite_to_apb_intf
+# 	axi_lite_to_axi_intf
+# 	axi_modify_address_intf
+# 	axi_mux_intf
+# 	axi_serializer_intf
+# 	axi_to_detailed_mem_intf
+# 	axi_cdc_intf
+# 	axi_lite_cdc_intf
+# 	axi_dw_converter_intf
+# 	axi_id_serialize_intf
+# 	axi_multicut_intf
+# 	axi_lite_multicut_intf
+# 	axi_to_axi_lite_intf
+# 	axi_iw_converter_intf
+# 	axi_lite_xbar_intf
+# 	axi_xbar_intf
+# 	axi_lite_from_mem
+# 	axi_to_mem_intf
+# 	axi_sim_mem_intf
+# 	axi_sim_mem_multiport_intf
+# End time: 18:14:49 on Jan 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 4
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:50 on Jan 11,2026
+# vlog -sv "+incdir+/home/users/i77031/Work/AXI_full/axi/include" -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" /home/users/i77031/Work/AXI_full/tb/axi_full_pkg.sv 
+# -- Compiling package axi_full_pkg
+# -- Importing package axi_pkg
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# ** Note: (vlog-2286) /home/users/i77031/Work/AXI_full/tb/axi_full_pkg.sv(5): Using implicit +incdir+/pkg/modeltech-2024.3/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# 
+# Top level modules:
+# 	--none--
+# End time: 18:14:50 on Jan 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:50 on Jan 11,2026
+# vlog -sv "+incdir+/home/users/i77031/Work/AXI_full/axi/include" "+incdir+/home/users/i77031/Work/AXI_full/uvm/" -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" /home/users/i77031/Work/AXI_full/uvm/axi_if.sv 
+# -- Compiling interface axi_if
+# -- Importing package axi_full_pkg
+# -- Importing package axi_pkg
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# 
+# Top level modules:
+# 	--none--
+# End time: 18:14:50 on Jan 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:50 on Jan 11,2026
+# vlog -sv "+incdir+/home/users/i77031/Work/AXI_full/axi/include" "+incdir+/home/users/i77031/Work/AXI_full/uvm/" -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" /home/users/i77031/Work/AXI_full/uvm/axi_full_uvm_pkg.sv 
+# -- Compiling package axi_full_uvm_pkg
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# ** Note: (vlog-2286) /home/users/i77031/Work/AXI_full/uvm/axi_full_uvm_pkg.sv(3): Using implicit +incdir+/pkg/modeltech-2024.3/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# -- Importing package axi_full_pkg
+# -- Importing package axi_pkg
+# ** Warning: /home/users/i77031/Work/AXI_full/uvm/axi_full_uvm_pkg.sv(18): (vlog-2283) Extra semicolon in $unit (global) scope.
+# ** Warning: /home/users/i77031/Work/AXI_full/uvm/axi_full_uvm_pkg.sv(19): (vlog-2284) Empty $unit scope found.
+# -- Compiling package axi_full_uvm_pkg_sv_unit
+# 
+# Top level modules:
+# 	--none--
+# End time: 18:14:51 on Jan 11,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 2
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:51 on Jan 11,2026
+# vlog -sv "+incdir+/home/users/i77031/Work/AXI_full/tb/" -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" /home/users/i77031/Work/AXI_full/tb/axi_full_tb_pkg.sv 
+# -- Compiling package axi_full_tb_pkg
+# ** Note: (vlog-2286) /home/users/i77031/Work/AXI_full/tb//axi_full_base_test.sv(1): Using implicit +incdir+/pkg/modeltech-2024.3/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# -- Importing package axi_full_uvm_pkg
+# -- Importing package axi_full_pkg
+# -- Importing package axi_pkg
+# 
+# Top level modules:
+# 	--none--
+# End time: 18:14:51 on Jan 11,2026, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
+# QuestaSim vlog 2024.3 Compiler 2024.09 Sep 10 2024
+# Start time: 18:14:51 on Jan 11,2026
+# vlog -sv "+incdir+/home/users/i77031/Work/AXI_full/axi/include" "+incdir+/home/users/i77031/Work/AXI_full/common_cells/src" -work work -suppress 1346 -lint -timescale 1ns/1ps "+incdir+/home/users/i77031/Work/AXI_full/axi/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/include +incdir+/home/users/i77031/Work/AXI_full/common_cells/src +incdir+/home/users/i77031/Work/AXI_full/uvm +incdir+/home/users/i77031/Work/AXI_full/tb" /home/users/i77031/Work/AXI_full/tb/axi_full_uvm_tb_top.sv 
+# -- Compiling module axi_full_uvm_tb_top
+# -- Importing package mtiUvm.uvm_pkg (uvm-1.1d Built-in)
+# ** Note: (vlog-2286) /home/users/i77031/Work/AXI_full/tb/axi_full_uvm_tb_top.sv(3): Using implicit +incdir+/pkg/modeltech-2024.3/uvm-1.1d/../verilog_src/uvm-1.1d/src from import uvm_pkg
+# -- Importing package axi_full_pkg
+# -- Importing package axi_pkg
+# -- Importing package axi_full_uvm_pkg
+# -- Importing package axi_full_tb_pkg
+# 
+# Top level modules:
+# 	axi_full_uvm_tb_top
+# End time: 18:14:52 on Jan 11,2026, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
+# vsim -libverbose -voptargs="+acc" -L uvm work.axi_full_uvm_tb_top "+UVM_VERBOSITY=UVM_FULL" -do "run -all; quit -f" 
+# Start time: 18:14:52 on Jan 11,2026
+# ** Note: (vsim-10012) Adding new library '/home/users/i77031/Work/AXI_full/work' to libsearch path.
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility. The +acc switch would be deprecated in a future release.
+# Support of the MGLS_LICENSE_FILE and LM_LICENSE_FILE licensing environment variables will be discontinued starting with the 2025.1 release. Please update to using the SALT_LICENSE_SERVER variable.
+# Please contact Siemens EDA Customer Support (https://support.sw.siemens.com/) for assistance.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# ** Note: (vsim-10013) Library 'uvm' is mapped to 'uvm' through modelsim.ini.
+# ** Note: (vsim-10013) Library 'work' is mapped to 'work' through modelsim.ini.
+# ** Note: (vsim-10013) Library 'flcov_ce_lib' is mapped to '$MODEL_TECH/../flcov_ce_lib' through modelsim.ini.
+# ** Note: (vsim-10013) Library 'vh_flcov_lib' is mapped to '$MODEL_TECH/../vh_flcov_lib' through modelsim.ini.
+# ** Note: (vsim-10013) Library 'vh_ux01v_lib' is mapped to '$MODEL_TECH/../vh_ux01v_lib' through modelsim.ini.
+# Libsearch options:
+# 	-L uvm -> /home/users/i77031/Work/AXI_full/uvm
+# 	-Ltop /home/users/i77031/Work/AXI_full/work -> /home/users/i77031/Work/AXI_full/work
+# //  Questa Sim
+# //  Version 2024.3 linux Sep 10 2024
+# //
+# // Unpublished work. Copyright 2024 Siemens
+# //
+# // This material contains trade secrets or otherwise confidential information
+# // owned by Siemens Industry Software Inc. or its affiliates (collectively,
+# // "SISW"), or its licensors. Access to and use of this information is strictly
+# // limited as set forth in the Customer's applicable agreements with SISW.
+# //
+# // This material may not be copied, distributed, or otherwise disclosed outside
+# // of the Customer's facilities without the express written permission of SISW,
+# // and may not be used in any way not expressly authorized by SISW.
+# //
+# Loading sv_std.std
+# Loading work.axi_if(fast)
+# Loading mtiUvm.uvm_pkg(fast)
+# Loading work.axi_pkg(fast)
+# Loading work.axi_full_pkg(fast)
+# Loading work.axi_full_uvm_pkg(fast)
+# Loading work.axi_full_tb_pkg(fast)
+# Loading mtiUvm.questa_uvm_pkg(fast)
+# Loading work.axi_full_uvm_tb_top(fast)
+# Loading work.axi_if(fast__2)
+# Loading work.axi_sim_mem(fast)
+# Loading /tmp/i77031@idc-cad-svr43_dpi_29436/linux_gcc-10.3.0/vsim_auto_compile.so
+# Loading /pkg/modeltech-2024.3/uvm-1.1d/linux/uvm_dpi.so
+# run -all
+# ----------------------------------------------------------------
+# UVM-1.1d
+# (C) 2007-2013 Mentor Graphics Corporation
+# (C) 2007-2013 Cadence Design Systems, Inc.
+# (C) 2006-2013 Synopsys, Inc.
+# (C) 2011-2013 Cypress Semiconductor Corp.
+# ----------------------------------------------------------------
+# 
+#   ***********       IMPORTANT RELEASE NOTES         ************
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_NO_DEPRECATED undefined.
+#   See http://www.eda.org/svdb/view.php?id=3313 for more details.
+# 
+#   You are using a version of the UVM library that has been compiled
+#   with `UVM_OBJECT_MUST_HAVE_CONSTRUCTOR undefined.
+#   See http://www.eda.org/svdb/view.php?id=3770 for more details.
+# 
+#       (Specify +UVM_NO_RELNOTES to turn off this notice)
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
+# UVM_INFO @ 0: reporter [RNTST] Running test axi_full_incr_burst_write_read_test...
+# UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
+# ---------------------------------------------------------------------------
+# Name                       Type                                 Size  Value
+# ---------------------------------------------------------------------------
+# uvm_test_top               axi_full_incr_burst_write_read_test  -     @471 
+#   axi_env_0                axi_env                              -     @478 
+#     axi_agent_0            axi_agent                            -     @489 
+#       axi_driver_0         axi_driver                           -     @511 
+#         rsp_port           uvm_analysis_port                    -     @526 
+#         seq_item_port      uvm_seq_item_pull_port               -     @518 
+#       axi_monitor_0        axi_monitor                          -     @504 
+#         dut_in_tx_port     uvm_analysis_port                    -     @644 
+#         dut_out_tx_port    uvm_analysis_port                    -     @652 
+#       axi_sequencer_0      uvm_sequencer                        -     @534 
+#         rsp_export         uvm_analysis_export                  -     @541 
+#         seq_item_export    uvm_seq_item_pull_imp                -     @635 
+#         arbitration_queue  array                                0     -    
+#         lock_queue         array                                0     -    
+#         num_last_reqs      integral                             32    'd1  
+#         num_last_rsps      integral                             32    'd1  
+#     axi_scoreboard_0       axi_scoreboard                       -     @496 
+#       in_fifo              uvm_tlm_analysis_fifo #(T)           -     @666 
+#         analysis_export    uvm_analysis_imp                     -     @705 
+#         get_ap             uvm_analysis_port                    -     @697 
+#         get_peek_export    uvm_get_peek_imp                     -     @681 
+#         put_ap             uvm_analysis_port                    -     @689 
+#         put_export         uvm_put_imp                          -     @673 
+#       in_imp               uvm_analysis_imp_in                  -     @760 
+#       out_fifo             uvm_tlm_analysis_fifo #(T)           -     @713 
+#         analysis_export    uvm_analysis_imp                     -     @752 
+#         get_ap             uvm_analysis_port                    -     @744 
+#         get_peek_export    uvm_get_peek_imp                     -     @728 
+#         put_ap             uvm_analysis_port                    -     @736 
+#         put_export         uvm_put_imp                          -     @720 
+#       out_imp              uvm_analysis_imp_out                 -     @768 
+# ---------------------------------------------------------------------------
+# 
+# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(339) @ 0: reporter [Questa UVM] End Of Elaboration
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'run'
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | x
+# W Ready              | x
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | 0
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'pre_reset'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'reset'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'post_reset'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'pre_configure'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'configure'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'post_configure'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'pre_main'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'main'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'post_main'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'pre_shutdown'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'shutdown'
+# UVM_INFO verilog_src/uvm-1.1d/src/seq/uvm_sequencer_base.svh(1384) @ 0: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0 [PHASESEQ] No default phase sequence for phase 'post_shutdown'
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 15000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | 0
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 15000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 0
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 0
+# W Ready              | x
+# AW Last              | 0
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_transaction.sv(213) @ 15000: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0@@axi_incr_wr_rd_seq [uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0.axi_incr_wr_rd_seq] Generating Burst Incrementing Write sequence
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(187) @ 25000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got AW Ready
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(116) @ 25000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [AW MON] AW Phase = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 25000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 8029000001000000000000000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 0
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 25000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 35000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 35000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 8029000000000000000000000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 0
+# 
+# Writing data channel
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(143) @ 45000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got W Ready
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(122) @ 45000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [W MON] Burst data = '{4065, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(124) @ 45000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [W MON] W Phase beat number =  1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 45000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 802900000000000fe1f300000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 0
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 45000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 55000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 55000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 802900000000000fe1f100000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 0
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(143) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got W Ready
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(122) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [W MON] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(124) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [W MON] W Phase beat number =  2
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(129) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [W MON] W Phase completed = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02fb00000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 65000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 1
+# mon_w_beat_count     | 0
+# mon_w_data_o         | fe1
+# mon_w_addr_o         | 4
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(95) @ 75000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] Trans Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 75000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 75000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 75000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 75000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f900000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(95) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX IN] 
+# AXI_REQUEST          | 80290000000000da02fb00000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(101) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX OUT] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 1
+# mon_w_beat_count     | 0
+# mon_w_data_o         | fe1
+# mon_w_addr_o         | 4
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(151) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [FUNC TX IN] 
+# AXI_REQUEST          | 80290000000000da02fb00000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(155) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Calculating burst addr
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(156) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst type = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(159) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] burst addr =          4
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(177) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst writing
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(178) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(179) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Single data = 00000fe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(181) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = '{4:4065 }
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(182) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = 00000fe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(177) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst writing
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(178) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(179) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Single data = 0000da02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(181) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = '{4:4065, 8:55810 }
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(182) @ 75000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = 0000da02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(156) @ 85000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got B Valid
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 85000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f900000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(95) @ 85000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] Trans Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 85000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | d000000000000
+# mon_w_valid_o        | 1
+# mon_w_beat_count     | 1
+# mon_w_data_o         | da02
+# mon_w_addr_o         | 8
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 95000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 95000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000000000000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_transaction.sv(259) @ 95000: uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0@@axi_incr_wr_rd_seq [uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0.axi_incr_wr_rd_seq] Generating Burst Incrementing Read sequence: 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(210) @ 105000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got AR Ready
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 105000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480002
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(168) @ 105000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [AR MON] AR Phase = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 105000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 115000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 115000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 115000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 0
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 115000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(95) @ 115000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX IN] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480002
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(101) @ 115000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX OUT] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | e000000000000
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 1
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(230) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got R Valid
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(231) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Read data = 00000fe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 0
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(174) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] Burst data = '{4065, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(177) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] R Phase beat number =  1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 125000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c01000000fe10
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 1
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(95) @ 125000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX IN] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(174) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(177) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] R Phase beat number =  2
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(181) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] R Phase completed = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c0100000da022
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 1
+# mon_r_data_o         | fe1
+# mon_r_addr_o         | 4
+# done_read            | 1
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 0
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(230) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Got R Valid
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_driver.sv(231) @ 135000: uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0 [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0] Read data = 0000da02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 145000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 145000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 0
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 145000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(95) @ 145000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [R MON] Trans Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 145000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c0000000da022
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 1
+# mon_r_valid_o        | 1
+# mon_r_data_o         | da02
+# mon_r_addr_o         | 8
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(101) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX OUT] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c0100000da022
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 1
+# mon_r_data_o         | fe1
+# mon_r_addr_o         | 4
+# done_read            | 1
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(191) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [FUNC TX IN] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(195) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Calculating burst addr
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(196) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst type = 1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(199) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] burst addr =          4
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(217) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst Reading
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(218) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(219) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Single data = 00000fe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(221) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = '{4:4065 }
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(222) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = 00000fe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(217) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst Reading
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(218) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Burst data = '{4065, 55810, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(219) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Single data = 0000da02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(221) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = '{4:4065, 8:55810 }
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(222) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [uvm_test_top.axi_env_0.axi_scoreboard_0] Item Queue = 0000da02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(132) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD] DONE_READ
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(141) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD] DATA READ BACK SUCCESSFULLY ACT=0xfe1 EXP=0xfe1
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(141) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD] DATA READ BACK SUCCESSFULLY ACT=0xda02 EXP=0xda02
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_scoreboard.sv(95) @ 145000: uvm_test_top.axi_env_0.axi_scoreboard_0 [SCOREBOARD TX IN] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 155000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c0000000da022
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(67) @ 155000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Burst data = '{x, x, x, x, x, x, x, x, x, x}
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(68) @ 155000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [MON_TO_SCOREBOARD] Read Write = 0
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 155000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480001
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(51) @ 165000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [INPUT MON] 
+# AXI_REQUEST          | 80290000000000da02f800000000401480000
+# AXI_RESPONSE         | x
+# mon_w_valid_o        | x
+# mon_w_beat_count     | x
+# mon_w_data_o         | x
+# mon_w_addr_o         | x
+# mon_r_last_o         | x
+# mon_r_valid_o        | x
+# mon_r_data_o         | x
+# mon_r_addr_o         | x
+# done_read            | x
+# AXI BURST            | 1
+# W Ready              | x
+# AW Last              | 1
+# 
+# UVM_INFO /home/users/i77031/Work/AXI_full/uvm//axi_monitor.sv(85) @ 165000: uvm_test_top.axi_env_0.axi_agent_0.axi_monitor_0 [OUTPUT MON] 
+# AXI_REQUEST          | x
+# AXI_RESPONSE         | c0000000da022
+# mon_w_valid_o        | 0
+# mon_w_beat_count     | 0
+# mon_w_data_o         | 0
+# mon_w_addr_o         | 0
+# mon_r_last_o         | 0
+# mon_r_valid_o        | 0
+# mon_r_data_o         | 0
+# mon_r_addr_o         | 0
+# done_read            | 0
+# AXI BURST            | x
+# W Ready              | 0
+# AW Last              | x
+# 
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1243) @ 165000: reporter [TEST_DONE] All end-of-test objections have been dropped. Calling stop tasks
+# UVM_INFO verilog_src/uvm-1.1d/src/base/uvm_objection.svh(1267) @ 165000: reporter [TEST_DONE] 'run' phase is ready to proceed to the 'extract' phase
+# 
+# --- UVM Report Summary ---
+# 
+# ** Report counts by severity
+# UVM_INFO :  130
+# UVM_WARNING :    0
+# UVM_ERROR :    0
+# UVM_FATAL :    0
+# ** Report counts by id
+# [AR MON]     1
+# [AW MON]     1
+# [FUNC TX IN]     2
+# [INPUT MON]    17
+# [MON_TO_SCOREBOARD]    12
+# [OUTPUT MON]    17
+# [PHASESEQ]    13
+# [Questa UVM]     3
+# [R MON]     8
+# [RNTST]     1
+# [SCOREBOARD]     3
+# [SCOREBOARD TX IN]     4
+# [SCOREBOARD TX OUT]     3
+# [TEST_DONE]     2
+# [UVMTOP]     1
+# [W MON]     5
+# [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0]     9
+# [uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0.axi_incr_wr_rd_seq]     2
+# [uvm_test_top.axi_env_0.axi_scoreboard_0]    26
+# ** Note: $finish    : /pkg/modeltech-2024.3/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
+#    Time: 165 ns  Iteration: 61  Instance: /axi_full_uvm_tb_top
+# End time: 18:15:01 on Jan 11,2026, Elapsed time: 0:00:09
+# Errors: 0, Warnings: 1
