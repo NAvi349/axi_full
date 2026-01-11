@@ -54,10 +54,12 @@ class axi_monitor extends uvm_monitor;
 		  if (completed_write_in | completed_read_in) begin
 		   //`uvm_info("AW_W_MON", "Pushing AW+W to scoreboard", UVM_LOW)
 	        //axi_tx.burst_data = burst;
-            if (completed_write_in) begin
-			  for (int i = 0; i < completed_w_beats; ++i)
-		        axi_tx.burst_data[i] = burst_data[i];
-				axi_tx.READ_WRITE = 1;
+            if (completed_write_in) begin 
+			  if (axi_tx.axi_req_i.aw.burst != 'b00) begin
+			    for (int i = 0; i < completed_w_beats; ++i)
+		          axi_tx.burst_data[i] = burst_data[i];
+			  end
+			  axi_tx.READ_WRITE = 1;
 			end
 
 			else if (completed_read_in) begin
@@ -88,8 +90,10 @@ class axi_monitor extends uvm_monitor;
 	      if (completed_write_out | completed_read_out) begin
 		   //`uvm_info("AR_R_MON", "Pushing AR+R to scoreboard", UVM_LOW)
 		    if (completed_read_out) begin
-			  for (int i = 0; i < completed_r_beats; ++i)
-		        axi_tx_out.burst_data[i] = burst_data_out[i];
+			  if (axi_tx.axi_req_i.ar.burst != 'b00) begin
+			    for (int i = 0; i < completed_r_beats; ++i)
+		          axi_tx_out.burst_data[i] = burst_data_out[i];
+			  end
 			  axi_tx_out.done_read = 1;
 			end
 	       `uvm_info("R MON", $sformatf("Trans Burst data = %p", axi_tx_out.burst_data), UVM_HIGH)
@@ -117,15 +121,19 @@ class axi_monitor extends uvm_monitor;
     end //}
     
     if (vif.axi_req_i.w_valid && vif.axi_resp_o.w_ready) begin //{Data to scoreboard
-      burst_data[completed_w_beats] = vif.axi_req_i.w.data;
-     
-	 `uvm_info("W MON", $sformatf("Burst data = %p", burst_data), UVM_HIGH)
+	  if (axi_tx.axi_req_i.aw.burst != 'b00) begin
+        burst_data[completed_w_beats] = vif.axi_req_i.w.data;
+       `uvm_info("W MON", $sformatf("Burst data = %p", burst_data), UVM_HIGH)
+	  end
+      else begin
+        axi_tx.axi_req_i.w.data = vif.axi_req_i.w.data;
+	   `uvm_info("W MON", $sformatf("Data written to memory = 0x%0h", axi_tx.axi_req_i.w.data), UVM_HIGH)
+	  end
       completed_w_beats += 1;
      `uvm_info("W MON", $sformatf("W Phase beat number = %d", completed_w_beats), UVM_MEDIUM) 
       if (axi_tx.axi_req_i.w.last) begin
         completed_w_burst = 1;
-
-		  axi_tx.READ_WRITE = 1;
+        axi_tx.READ_WRITE = 1;
 	   `uvm_info("W MON", $sformatf("W Phase completed = %b", completed_w_burst), UVM_MEDIUM)
       end
     end //}
@@ -169,10 +177,15 @@ class axi_monitor extends uvm_monitor;
     end //}
     
     if (vif.axi_resp_o.r_valid && vif.axi_req_i.r_ready) begin //{Data to scoreboard
-      burst_data_out[completed_r_beats] = vif.axi_resp_o.r.data;
-     
-	 `uvm_info("R MON", $sformatf("Burst data = %p", burst_data_out), UVM_MEDIUM)
-      
+      if (axi_tx_out.axi_req_i.ar.burst == 'b00) begin
+	    axi_tx_out.axi_resp_o.r.data = vif.axi_resp_o.r.data;
+	   `uvm_info("R MON", $sformatf("data read from DUT = 0x%0h", axi_tx_out.axi_resp_o.r.data), UVM_MEDIUM)
+	  end
+	  else begin
+	    burst_data_out[completed_r_beats] = vif.axi_resp_o.r.data;
+	   `uvm_info("R MON", $sformatf("Burst data = %p", burst_data_out), UVM_MEDIUM)
+      end
+ 
 	  completed_r_beats += 1;
      `uvm_info("R MON", $sformatf("R Phase beat number = %d", completed_r_beats), UVM_MEDIUM) 
       if (completed_r_beats == (vif.axi_req_i.ar.len+1)) begin
