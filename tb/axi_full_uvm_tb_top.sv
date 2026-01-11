@@ -126,12 +126,9 @@ module axi_full_uvm_tb_top;
 	 	// second: access to specified components, * indicates all
 	 	// lookup name string	
 	 	// static interface
-		//
-	    //run_test("axi_lite_write_read_test");
-	 	//run_test("axi_lite_read_test");
+
 	 	run_test("axi_full_incr_burst_write_read_test");
-		//run_test("apb_protocol_read_test");
-	 	//run_test();
+
 	 	// use +UVM_TESTNAME with vsim terminal argument
 	 end
 
