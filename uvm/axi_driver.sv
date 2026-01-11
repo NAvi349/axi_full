@@ -128,9 +128,13 @@ class axi_driver extends uvm_driver #(axi_transaction);
   endtask
 
   virtual task drive_burst_write(axi_transaction tx);
-	    axi_if0.axi_req_i.b_ready <= 1'b1;
-    for (int i = 0; i <= tx.axi_req_i.aw.len; ++i) begin
-	  axi_if0.axi_req_i.w.data <= tx.burst_data[i];
+	axi_if0.axi_req_i.b_ready <= 1'b1;
+    
+	for (int i = 0; i <= tx.axi_req_i.aw.len; ++i) begin
+	  if (axi_if0.axi_req_i.aw.burst != 'b00)
+	    axi_if0.axi_req_i.w.data <= tx.burst_data[i];
+	  else
+	    axi_if0.axi_req_i.w.data <= tx.axi_req_i.w.data;
 	  axi_if0.axi_req_i.w.strb <= tx.axi_req_i.w.strb;
       axi_if0.axi_req_i.w.last <= (i == (tx.axi_req_i.aw.len));
 
