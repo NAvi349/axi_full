@@ -60,81 +60,14 @@ class axi_driver extends uvm_driver #(axi_transaction);
 	@(axi_if0.clock);
   endtask: reset_dut
 
-  virtual task drive_write(axi_transaction tx);
-
-	  axi_if0.axi_req_i.aw.addr <= tx.axi_req_i.aw.addr;
-	  axi_if0.axi_req_i.aw.len <= tx.axi_req_i.aw.len;
-	  axi_if0.axi_req_i.aw.id  <= tx.axi_req_i.aw.id;
-	  axi_if0.axi_req_i.aw.size <= tx.axi_req_i.aw.size;
-	  axi_if0.axi_req_i.w.data <= tx.axi_req_i.w.data;
-	  axi_if0.axi_req_i.w.strb <= tx.axi_req_i.w.strb;
-      axi_if0.axi_req_i.w.last <= tx.axi_req_i.w.last;
-	  //axi_if0.mem_gnt_i        <= '1;
-	  // These three should be drive to do proper write
-	  axi_if0.axi_req_i.b_ready <= 1'b1;
-	  axi_if0.axi_req_i.aw_valid <= 1'b1;
-	  axi_if0.axi_req_i.w_valid <= 1'b1;
-
-      while (!axi_if0.axi_resp_o.aw_ready)
-	 @(posedge axi_if0.clock);
-
-	 `uvm_info(get_full_name(), "Got AW Ready", UVM_LOW)
-
-	 @(posedge axi_if0.clock);
-	  axi_if0.axi_req_i.aw_valid <= 1'b0;
-
-	  while (!axi_if0.axi_resp_o.w_ready)
-	 @(posedge axi_if0.clock);
-
-	 `uvm_info(get_full_name(), "Got W Ready", UVM_LOW)
-	  axi_if0.axi_req_i.w_valid <= 1'b0;
-
-	  while (!axi_if0.axi_resp_o.b_valid)
-	 @(posedge axi_if0.clock);
-
-	 `uvm_info(get_full_name(), "Got B Valid", UVM_LOW)
-	 
-	 @(posedge axi_if0.clock);
-	  axi_if0.axi_req_i <= 1'b0;
-	  
-
-  endtask: drive_write
-
-  virtual task drive_read(axi_transaction tx);
-    
-	axi_if0.axi_req_i.ar.addr <= tx.axi_req_i.ar.addr;
-	axi_if0.axi_req_i.r_ready <= 1'b1;
-	axi_if0.axi_req_i.ar_valid <= 1'b1;
-	axi_if0.axi_req_i.ar.len <= tx.axi_req_i.ar.len;
-	axi_if0.axi_req_i.ar.id  <= tx.axi_req_i.ar.id;
-	axi_if0.axi_req_i.ar.size <= tx.axi_req_i.ar.size;
-	//axi_if0.axi_req_i.w.strb <= tx.axi_req_i.w.strb;
-    
-
-    //axi_if0.mem_rvalid_i <= 1'b1;
-
-    while (!axi_if0.axi_resp_o.r_valid)
-	@(posedge axi_if0.clock);
-
-    while (!axi_if0.mon_r_valid_o)
-	@(posedge axi_if0.clock);
-  
-   `uvm_info(get_full_name(), $sformatf("Got R Valid"), UVM_LOW)
-   `uvm_info(get_full_name(), $sformatf("Read data = %h", axi_if0.axi_resp_o.r.data), UVM_INFO);
-    
-	axi_if0.axi_req_i.ar_valid <= 1'b0;
-	axi_if0.axi_req_i.r_ready <= 1'b0;
-
-  endtask
-
   virtual task drive_burst_write(axi_transaction tx);
 	axi_if0.axi_req_i.b_ready <= 1'b1;
     
 	for (int i = 0; i <= tx.axi_req_i.aw.len; ++i) begin
-	  if (axi_if0.axi_req_i.aw.burst != 'b00)
+	  //if (axi_if0.axi_req_i.aw.burst != 'b00)
 	    axi_if0.axi_req_i.w.data <= tx.burst_data[i];
-	  else
-	    axi_if0.axi_req_i.w.data <= tx.axi_req_i.w.data;
+	  //else
+	  //  axi_if0.axi_req_i.w.data <= tx.axi_req_i.w.data;
 	  axi_if0.axi_req_i.w.strb <= tx.axi_req_i.w.strb;
       axi_if0.axi_req_i.w.last <= (i == (tx.axi_req_i.aw.len));
 
@@ -242,8 +175,6 @@ class axi_driver extends uvm_driver #(axi_transaction);
 	axi_if0.axi_req_i.r_ready <= 1'b0; 
 	
     @(posedge axi_if0.clock);
-
-	
 
   endtask: drive_burst_read
 
