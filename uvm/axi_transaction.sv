@@ -172,6 +172,7 @@ class axi_write_read_sequence extends uvm_sequence #(axi_transaction);
     axi_write_read_trans.axi_req_i.aw.size = 'h2;
     axi_write_read_trans.axi_req_i.aw.burst = 'b0;
 	axi_write_read_trans.axi_req_i.w.data  = 32'h00000301;
+	axi_write_read_trans.burst_data        = {32'h301, 32'hDA02, 32'hCE03, 32'h9B04, 0, 0, 0, 0, 0, 0};
     axi_write_read_trans.axi_req_i.w.strb  = 4'b1111;
     axi_write_read_trans.axi_req_i.w.last  = 1'b1;
     axi_write_read_trans.READ_WRITE        = 1'b1;
@@ -240,3 +241,49 @@ class axi_incr_burst_write_read_sequence extends uvm_sequence #(axi_transaction)
   endtask
 
 endclass: axi_incr_burst_write_read_sequence
+
+
+class axi_wrap_burst_write_read_sequence extends uvm_sequence #(axi_transaction);
+
+  axi_transaction axi_write_read_trans;
+
+ `uvm_object_utils(axi_wrap_burst_write_read_sequence)
+
+  function new (string name = "axi_write_read_sequence");
+    super.new(name);
+  endfunction: new
+
+  virtual task body();
+    
+	axi_write_read_trans = axi_transaction::type_id::create("axi_write_read_trans");
+	//assert(axi_read_trans.axi_req_i.randomize());
+	
+	start_item(axi_write_read_trans);	
+   `uvm_info(get_full_name(), "Generating Wrap Burst Write sequence", UVM_LOW)
+    axi_write_read_trans.axi_req_i.aw.len  = 'h3; 
+    axi_write_read_trans.axi_req_i.aw.id   = 'h0;
+    axi_write_read_trans.axi_req_i.aw.addr = 'h04; 
+    axi_write_read_trans.axi_req_i.aw.size = 'h2;   
+	axi_write_read_trans.axi_req_i.aw.burst = 'b10;
+	axi_write_read_trans.axi_req_i.w.data  = 0;
+    axi_write_read_trans.axi_req_i.w.strb  = 4'b1111;
+    axi_write_read_trans.axi_req_i.w.last  = 1'b0;
+    axi_write_read_trans.READ_WRITE        = 1'b1;
+	axi_write_read_trans.first             = 1'b1;
+	axi_write_read_trans.burst_data        = {32'hFE1, 32'hDA02, 32'hCE03, 32'h9B04, 0, 0, 0, 0, 0, 0};
+	finish_item(axi_write_read_trans);
+
+    start_item(axi_write_read_trans);
+   `uvm_info(get_full_name(), "Generating Wrap Burst Read sequence: ", UVM_LOW)	
+	axi_write_read_trans.axi_req_i.ar.addr = 'h04;
+    axi_write_read_trans.axi_req_i.ar.len = 'h3;
+	axi_write_read_trans.axi_req_i.ar.id = 'h0;
+	axi_write_read_trans.axi_req_i.ar.size = 'h2;
+	axi_write_read_trans.axi_req_i.ar.burst = 'b10;
+	axi_write_read_trans.first_read = 'h1;
+    axi_write_read_trans.READ_WRITE = 'b0;
+    finish_item(axi_write_read_trans);
+
+  endtask
+
+endclass: axi_wrap_burst_write_read_sequence
