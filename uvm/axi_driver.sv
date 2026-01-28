@@ -40,12 +40,25 @@ class axi_driver extends uvm_driver #(axi_transaction);
 	  end
 
 	  else if (axi_tx.READ_WRITE == 1) begin
-	    //if (axi_tx.axi_req_i.aw.burst == 0)
-	    //  drive_write(axi_tx);
-	    drive_burst_write_address(axi_tx);
-		axi_tx.first = 0;
-	    $display("Writing data channel"); 
-		drive_burst_write(axi_tx);
+	    if (axi_tx.addr_data == 0) begin // single-id
+         `uvm_info("WRITE_DRIVER", "Writing data address channel for single-ID", UVM_LOW)
+		  drive_burst_write_address(axi_tx);
+		 `uvm_info("WRITE_DRIVER", "Writing data channel for single-ID", UVM_LOW)
+		  drive_burst_write(axi_tx);
+		end
+		else begin //multi-id
+	      //if (axi_tx.axi_req_i.aw.burst == 0)
+	      //  drive_write(axi_tx);
+		  if (axi_tx.addr_data == 'h1) begin
+		   `uvm_info("WRITE_DRIVER", "Writing data address channel", UVM_LOW)
+	        drive_burst_write_address(axi_tx);
+		  end
+		  else if (axi_tx.addr_data == 'h2) begin
+		    //axi_tx.first = 0;
+	       `uvm_info("WRITE_DRIVER", "Writing data channel", UVM_LOW); 
+		    drive_burst_write(axi_tx);
+		  end
+		end
       end
 
 	  seq_item_port.item_done();
@@ -77,7 +90,7 @@ class axi_driver extends uvm_driver #(axi_transaction);
 	  while (!axi_if0.axi_resp_o.w_ready)
 	 @(posedge axi_if0.clock);
 
-	 `uvm_info(get_full_name(), "Got W Ready", UVM_LOW)
+	 `uvm_info("WRITE_DRIVER", "Got W Ready", UVM_LOW)
 	  axi_if0.axi_req_i.w_valid <= 1'b0;
      @(posedge axi_if0.clock);
 
@@ -90,7 +103,7 @@ class axi_driver extends uvm_driver #(axi_transaction);
 	   while (!axi_if0.axi_resp_o.b_valid)
 	  @(posedge axi_if0.clock);
 
-	 `uvm_info(get_full_name(), "Got B Valid", UVM_LOW)
+	 `uvm_info("WRITE_DRIVER", "Got B Valid", UVM_LOW)
 	  axi_if0.axi_req_i.b_ready <= 1'b0; 
 	  @(posedge axi_if0.clock);
 	  //axi_if0.axi_req_i <= 1'b0;
@@ -121,7 +134,7 @@ class axi_driver extends uvm_driver #(axi_transaction);
 
 	  axi_if0.axi_req_i.aw_valid <= 1'b0;
 
-	 `uvm_info(get_full_name(), "Got AW Ready", UVM_LOW)
+	 `uvm_info("WRITE_DRIVER", "Got AW Ready", UVM_LOW)
       @(posedge axi_if0.clock);
 
 
@@ -144,7 +157,7 @@ class axi_driver extends uvm_driver #(axi_transaction);
     while (!axi_if0.axi_resp_o.ar_ready)
 	@(posedge axi_if0.clock);
    
-   `uvm_info(get_full_name(), $sformatf("Got AR Ready"), UVM_LOW)
+   `uvm_info("WRITE_DRIVER", $sformatf("Got AR Ready"), UVM_LOW)
 	
 	axi_if0.axi_req_i.r_ready <= 1'b1; 
  
@@ -164,8 +177,8 @@ class axi_driver extends uvm_driver #(axi_transaction);
      //while (!axi_if0.axi_resp_o.r_valid)
 	 //@(posedge axi_if0.clock);
    
-     `uvm_info(get_full_name(), $sformatf("Got R Valid"), UVM_LOW)
-     `uvm_info(get_full_name(), $sformatf("Read data = %h", axi_if0.axi_resp_o.r.data), UVM_INFO);      
+     `uvm_info("READ_DRIVER", $sformatf("Got R Valid"), UVM_LOW)
+     `uvm_info("READ_DRIVER", $sformatf("Read data = %h", axi_if0.axi_resp_o.r.data), UVM_INFO);      
       
 	 @(posedge axi_if0.clock);
       	 
@@ -178,4 +191,11 @@ class axi_driver extends uvm_driver #(axi_transaction);
 
   endtask: drive_burst_read
 
-endclass
+
+  //virtual task drive_multi_id_burst_write(axi transaction tx);
+
+
+  //endtask: drive_multi_id_burst_write
+
+
+endclass: axi_driver
