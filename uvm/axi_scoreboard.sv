@@ -15,7 +15,7 @@ class axi_scoreboard extends uvm_scoreboard;
   axi_transaction tx_out_d;
   axi_transaction tx_in_r_d;
   
-  bit done_read;
+  static bit done_read;
   logic [3:0] w_cnt = 0;
   logic [3:0] r_cnt = 0;
   bit input_got;
@@ -89,168 +89,159 @@ class axi_scoreboard extends uvm_scoreboard;
 	  input_got = 0;
 	  output_got = 0;
 
-	  //fork //{ 
 
-	   
-		// Process both DUT input and output monitor transaction
-	    begin
-          in_fifo.get(tx_in);
-	     `uvm_info("SCOREBOARD TX IN", $sformatf("%s", tx_in.convert2str()), UVM_HIGH)
-		  input_got = 1;
-		end
-	           
-		begin
-          out_fifo.get(tx_out);
-		 `uvm_info("SCOREBOARD TX OUT", $sformatf("%s", tx_out.convert2str()), UVM_HIGH)
-		  output_got = 1;
-		end
+      fork 
+      // Process both DUT input and output monitor transaction
+      begin
+        in_fifo.get(tx_in);
+        
+		//if (!tx_in) begin
+	    
+	     `uvm_info("SCOREBOARD_TX_IN", $sformatf("%s", tx_in.convert2str()), UVM_HIGH)
+          input_got = 1;
+		//end
+      end
+           
+      begin
+        out_fifo.get(tx_out);
 
-		begin
-		  if (input_got && output_got) begin
-		   if (tx_in.READ_WRITE == 1) begin
-		     process_aw(tx_in, tx_out);
-		     process_w(tx_in, tx_out);
-		   end
-		  end
-		  //process_b();
-		end
+		//if (!tx_out) begin
+         `uvm_info("SCOREBOARD_TX_OUT", $sformatf("%s", tx_out.convert2str()), UVM_HIGH)
+          output_got = 1;
+		//end
+        
+      end
 
-		begin
-          if (input_got && output_got) begin
-		    if (tx_in.READ_WRITE == 0 && tx_out.done_read) begin
-              process_ar(tx_in, tx_out);
-			  process_r(tx_in, tx_out);
-			end
-		  end
-		end
+	  join_any
 
-		input_got = 1;
-		output_got = 1;
+	  disable fork;
 
-	  //join //}
+      if ((input_got) && (tx_in.READ_WRITE == 1)) begin
+         process_aw(tx_in);
+         process_w(tx_in);
+       end
+   
+      if (output_got && (tx_out.READ_WRITE == 1) && tx_out.done_read) begin
+        process_ar(tx_out);
+  	    process_r(tx_out);
+  	  end
 
-	  //disable fork;
 
       if (tx_out.done_read && done_read) begin // wait for read data to be available to the scoreboard {
-	   `uvm_info("SCOREBOARD", $sformatf("DONE_READ"), UVM_NONE)
-		//if (tx_in.READ_WRITE == 0) begin
-		for (int i = 0; i <= tx_in.axi_req_i.ar.len; ++i) begin
-		  if (tx_in.axi_req_i.ar.burst == 'b10) // For wrapping burst formulation is different
-		    comp_addr = ((tx_in.axi_req_i.ar.addr / wrap_boundary_r) * wrap_boundary_r) +  (tx_in.axi_req_i.ar.addr + ((burst_addr_r * i) % wrap_boundary_r)) % wrap_boundary_r;
+	   `uvm_info("COMPARISON", $sformatf("DONE_READ"), UVM_NONE)
+		
+		for (int i = 0; i <= tx_out.axi_req_i.ar.len; ++i) begin //{
+		  if (tx_out.axi_req_i.ar.burst == 'b10) // For wrapping burst formulation is different {
+		    comp_addr = ((tx_out.axi_req_i.ar.addr / wrap_boundary_r) * wrap_boundary_r) +  (tx_out.axi_req_i.ar.addr + ((burst_addr_r * i) % wrap_boundary_r)) % wrap_boundary_r;
           else
-		    comp_addr = tx_in.axi_req_i.ar.addr + (burst_addr_r * i);
+		    comp_addr = tx_out.axi_req_i.ar.addr + (burst_addr_r * i);
 		 `uvm_info("COMPARISON", $sformatf("Comparison addr = 0x%0h", comp_addr), UVM_LOW)
 		  if (item_q[comp_addr] != actual_item_q[comp_addr]) begin
-           `uvm_error("SCOREBOARD", $sformatf("MISMATCH ACT=0x%0h EXP=0x%0h", actual_item_q[comp_addr], item_q[comp_addr]))
+           `uvm_error("COMPARISON", $sformatf("MISMATCH ACT=0x%0h EXP=0x%0h", actual_item_q[comp_addr], item_q[comp_addr]))
 		  end
 
 		  else begin 
-           `uvm_info("SCOREBOARD", $sformatf("DATA READ BACK SUCCESSFULLY ACT=0x%0h EXP=0x%0h", actual_item_q[comp_addr], item_q[comp_addr]), UVM_INFO)
+           `uvm_info("COMPARISON", $sformatf("DATA READ BACK SUCCESSFULLY ACT=0x%0h EXP=0x%0h", actual_item_q[comp_addr], item_q[comp_addr]), UVM_INFO)
           end
-		end
-		//end
+		end //}
+		done_read = 0;
       end //}
 	end //}
 
   endtask: run_phase
   
-  virtual function automatic void process_aw (axi_transaction tx_in, axi_transaction tx_out);
-   `uvm_info("FUNC TX IN", $sformatf("%s", tx_in.convert2str()), UVM_HIGH) 
-    
-	  // In this function calculate the burst increment address for the burst
-	 `uvm_info(get_full_name(), $sformatf("Burst type = %0b", tx_in.axi_req_i.aw.burst), UVM_MEDIUM)
-	 
-      if (tx_in.axi_req_i.aw.burst == 2'b00) begin  //{ fixed burst, single beat
-	   `uvm_info(get_full_name(), "Calculating burst addr for fixed address", UVM_MEDIUM)
-        burst_addr = 0;
-		wrap_boundary = 0;
-	   `uvm_info(get_full_name(), $sformatf("burst addr = %d", burst_addr), UVM_LOW)
-      end //}
+  virtual function automatic void process_aw (axi_transaction tx_in);
+   `uvm_info("SCOREBOARD_AW", $sformatf("%s", tx_in.convert2str()), UVM_HIGH) 
+ 
+    // In this function calculate the burst increment address for the burst
+   `uvm_info("SCOREBOARD_AW", $sformatf("Write Burst type = %0b", tx_in.axi_req_i.aw.burst), UVM_MEDIUM)
+   
+    if (tx_in.axi_req_i.aw.burst == 2'b00) begin  //{ fixed burst, single beat
+     `uvm_info("SCOREBOARD_AW", "Calculating write burst addr for fixed address", UVM_MEDIUM)
+      burst_addr = 0;
+  	  wrap_boundary = 0;
+     `uvm_info("SCOREBOARD_AW", $sformatf("write burst addr = %d", burst_addr), UVM_LOW)
+    end //}
 
-      else if (tx_in.axi_req_i.aw.burst == 'b01) begin //{ incremental burst
-	   `uvm_info(get_full_name(), "Calculating burst addr for incremental burst", UVM_MEDIUM)
-        burst_addr = (1 << tx_in.axi_req_i.aw.size);
-		wrap_boundary = 0;
-	   `uvm_info(get_full_name(), $sformatf("burst addr = %d", burst_addr), UVM_LOW)
-      end //}
+    else if (tx_in.axi_req_i.aw.burst == 'b01) begin //{ incremental burst
+     `uvm_info("SCOREBOARD_AW", "Calculating burst addr for incremental burst", UVM_MEDIUM)
+      burst_addr = (1 << tx_in.axi_req_i.aw.size);
+  	  wrap_boundary = 0;
+     `uvm_info("SCOREBOARD_AW", $sformatf("burst addr = %d", burst_addr), UVM_LOW)
+    end //}
 
-      else if (tx_in.axi_req_i.aw.burst == 'b10) begin //{
-	   `uvm_info(get_full_name(), "Calculating burst addr for wrapping burst", UVM_MEDIUM)
-	    burst_addr = (1 << tx_in.axi_req_i.aw.size);
-	    wrap_boundary = burst_addr * (tx_in.axi_req_i.aw.len + 1);  
-	   `uvm_info(get_full_name(), $sformatf("Wrap boundary = %d", wrap_boundary), UVM_LOW)
-	   `uvm_info(get_full_name(), $sformatf("Wrapping burst addr = %d", burst_addr), UVM_LOW)
+    else if (tx_in.axi_req_i.aw.burst == 'b10) begin //{
+     `uvm_info("SCOREBOARD_AW", "Calculating burst addr for wrapping burst", UVM_MEDIUM)
+      burst_addr = (1 << tx_in.axi_req_i.aw.size);
+      wrap_boundary = burst_addr * (tx_in.axi_req_i.aw.len + 1);  
+     `uvm_info("SCOREBOARD_AW", $sformatf("Wrap boundary = %d", wrap_boundary), UVM_LOW)
+     `uvm_info("SCOREBOARD_AW", $sformatf("Wrapping burst addr = %d", burst_addr), UVM_LOW)
 
-      end //}
+    end //}
 
 	//end
 
   endfunction
 
-  virtual function automatic void process_w (axi_transaction tx_in, axi_transaction tx_out);
+  virtual function automatic void process_w (axi_transaction tx_in);
     
 	//if (tx_in.axi_req_i.w_valid & tx_out.axi_resp_o.w_ready) begin
 	if (tx_in.axi_req_i.aw.burst != 'b10) begin //{
       for (int i = 0; i <= tx_in.axi_req_i.aw.len; ++i) begin //{ 
-       `uvm_info(get_full_name(), "Burst writing", UVM_LOW)
-       `uvm_info(get_full_name(), $sformatf("Burst data = %p",tx_in.burst_data), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Single data = %h",tx_in.burst_data[i]), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_W", "Burst writing", UVM_LOW)
+       `uvm_info("SCOREBOARD_W", $sformatf("Burst data = %p",tx_in.burst_data), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_W", $sformatf("Single data = %h",tx_in.burst_data[i]), UVM_MEDIUM)
         item_q[tx_in.axi_req_i.aw.addr + (burst_addr * i)] = tx_in.burst_data[i];
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %p", item_q), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %h", item_q[tx_in.axi_req_i.aw.addr + (burst_addr * i)]), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_W", $sformatf("Item Queue = %p", item_q), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_W", $sformatf("Item Queue = %h", item_q[tx_in.axi_req_i.aw.addr + (burst_addr * i)]), UVM_MEDIUM)
       end //}
     end //}
 
 	else if (tx_in.axi_req_i.aw.burst == 'b10) begin //{ // wrapping burst
 	  for (int i = 0; i <= tx_in.axi_req_i.aw.len; ++i) begin //{ 
-       `uvm_info(get_full_name(), "Wrapping burst", UVM_LOW)
-	   `uvm_info(get_full_name(), $sformatf("Burst data = %p",tx_in.burst_data), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Single data = 0x%0h",tx_in.burst_data[i]), UVM_MEDIUM)
-	    wrapping_addr = ((tx_in.axi_req_i.ar.addr / wrap_boundary) * wrap_boundary) +  (tx_in.axi_req_i.aw.addr + ((burst_addr * i) % wrap_boundary)) % wrap_boundary;
+       `uvm_info("SCOREBOARD_W", "Wrapping burst", UVM_LOW)
+	   `uvm_info("SCOREBOARD_W", $sformatf("Burst data = %p",tx_in.burst_data), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_W", $sformatf("Single data = 0x%0h",tx_in.burst_data[i]), UVM_MEDIUM)
+	    wrapping_addr = ((tx_in.axi_req_i.aw.addr / wrap_boundary) * wrap_boundary) +  (tx_in.axi_req_i.aw.addr + ((burst_addr * i) % wrap_boundary)) % wrap_boundary;
 	    item_q[wrapping_addr] = tx_in.burst_data[i];
-	   `uvm_info(get_full_name(), $sformatf("Addr = 0x%0h", wrapping_addr), UVM_MEDIUM)
-	   `uvm_info(get_full_name(), $sformatf("Item Queue = 0x%0h", (item_q[wrapping_addr])), UVM_MEDIUM)
+	   `uvm_info("SCOREBOARD_W", $sformatf("Addr = 0x%0h", wrapping_addr), UVM_MEDIUM)
+	   `uvm_info("SCOREBOARD_W", $sformatf("Item Queue = 0x%0h", (item_q[wrapping_addr])), UVM_MEDIUM)
       end //}
 	end //}
 
-	//else begin
-    // `uvm_info(get_full_name(), $sformatf("Single data = %p", tx_in.axi_req_i.w.data), UVM_MEDIUM)
-	//  item_q[tx_in.axi_req_i.aw.addr] = tx_in.axi_req_i.w.data; 
-	// `uvm_info(get_full_name(), $sformatf("Item Queue = %p", item_q), UVM_MEDIUM)
-    // `uvm_info(get_full_name(), $sformatf("Item Queue = %h", item_q[tx_in.axi_req_i.aw.addr]), UVM_MEDIUM)
-    //end
+	//el
 
   endfunction
 
-  virtual function automatic void process_ar (axi_transaction tx_in, axi_transaction tx_out);
-   `uvm_info("FUNC TX IN", $sformatf("%s", tx_in.convert2str()), UVM_HIGH) 
+  virtual function automatic void process_ar (axi_transaction tx_out);
+   `uvm_info("SCOREBOARD_AR", $sformatf("%s", tx_out.convert2str()), UVM_HIGH) 
     
 	//if (tx_in.axi_req_i.aw_valid & tx_out.axi_resp_o.aw_ready) begin
 	  // In this function calculate the burst increment address for the burst
 
-	 `uvm_info(get_full_name(), $sformatf("Read Burst type = %0b", tx_in.axi_req_i.ar.burst), UVM_MEDIUM)
-      if (tx_in.axi_req_i.ar.burst == 2'b00) begin  //{ Fixed
-       `uvm_info(get_full_name(), "Calculating Fixed Read burst addr", UVM_MEDIUM)
+	 `uvm_info("SCOREBOARD_AR", $sformatf("Read Burst type = %0b", tx_out.axi_req_i.ar.burst), UVM_MEDIUM)
+      if (tx_out.axi_req_i.ar.burst == 2'b00) begin  //{ Fixed
+       `uvm_info("SCOREBOARD_AR", "Calculating Fixed Read burst addr", UVM_MEDIUM)
 		burst_addr_r = 0;
 		wrap_boundary = 0;
-	   `uvm_info(get_full_name(), $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
+	   `uvm_info("SCOREBOARD_AR", $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
       end //}
 
-      else if (tx_in.axi_req_i.ar.burst == 'b01) begin //{ incremental burst
-       `uvm_info(get_full_name(), "Calculating Read incremental burst addr", UVM_MEDIUM)
-		burst_addr_r = (1 << tx_in.axi_req_i.ar.size);
+      else if (tx_out.axi_req_i.ar.burst == 'b01) begin //{ incremental burst
+       `uvm_info("SCOREBOARD_AR", "Calculating Read incremental burst addr", UVM_MEDIUM)
+		burst_addr_r = (1 << tx_out.axi_req_i.ar.size);
 		wrap_boundary = 0;
-	   `uvm_info(get_full_name(), $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
+	   `uvm_info("SCOREBOARD_AR", $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
       end //}
 
 
-      else if (tx_in.axi_req_i.ar.burst == 'b10) begin //{
-       `uvm_info(get_full_name(), "Calculating Read wrapping burst addr", UVM_MEDIUM)
-		burst_addr_r = (1 << tx_in.axi_req_i.ar.size);
-	   `uvm_info(get_full_name(), $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
-	    wrap_boundary_r = (1 << tx_in.axi_req_i.aw.size) * (tx_in.axi_req_i.aw.len + 1);  
-	   `uvm_info(get_full_name(), $sformatf("Wrap boundary = 0x%0h", wrap_boundary_r), UVM_LOW)
-	   `uvm_info(get_full_name(), $sformatf("Wrapping burst addr = 0x%0h", burst_addr), UVM_LOW)
+      else if (tx_out.axi_req_i.ar.burst == 'b10) begin //{
+       `uvm_info("SCOREBOARD_AR", "Calculating Read wrapping burst addr", UVM_MEDIUM)
+		burst_addr_r = (1 << tx_out.axi_req_i.ar.size);
+	   `uvm_info("SCOREBOARD_AR", $sformatf("burst addr = 0x%0h", burst_addr_r), UVM_MEDIUM)
+	    wrap_boundary_r = (1 << tx_out.axi_req_i.ar.size) * (tx_out.axi_req_i.ar.len + 1);  
+	   `uvm_info("SCOREBOARD_AR", $sformatf("Wrap boundary = 0x%0h", wrap_boundary_r), UVM_LOW)
+	   `uvm_info("SCOREBOARD_AR", $sformatf("Wrapping burst addr = 0x%0h", burst_addr_r), UVM_LOW)
       end //}
 
 
@@ -258,32 +249,32 @@ class axi_scoreboard extends uvm_scoreboard;
 
   endfunction
 
-  virtual function automatic void process_r (axi_transaction tx_in, axi_transaction tx_out);
+  virtual function automatic void process_r (axi_transaction tx_out);
     
 	//if (tx_in.axi_req_i.w_valid & tx_out.axi_resp_o.w_ready) begin
 	//if (tx_in.axi_req_i.w_valid & tx_out.axi_resp_o.w_ready) begin
-	if (tx_in.axi_req_i.ar.burst !== 'b10) begin //{
-      for (int i = 0; i <= tx_in.axi_req_i.ar.len; ++i) begin //{ 
-       `uvm_info(get_full_name(), "Burst reading", UVM_LOW)
-       `uvm_info(get_full_name(), $sformatf("Burst data = %p",tx_out.burst_data), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Single data = %h",tx_out.burst_data[i]), UVM_MEDIUM)
-        actual_item_q[tx_in.axi_req_i.ar.addr + (burst_addr_r * i)] = tx_out.burst_data[i];
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %p", actual_item_q), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %h", actual_item_q[tx_in.axi_req_i.ar.addr + (burst_addr_r * i)]), UVM_MEDIUM)
+	if (tx_out.axi_req_i.ar.burst !== 'b10) begin //{
+      for (int i = 0; i <= tx_out.axi_req_i.ar.len; ++i) begin //{ 
+       `uvm_info("SCOREBOARD_R", "Burst reading", UVM_LOW)
+       `uvm_info("SCOREBOARD_R", $sformatf("Burst data = %p",tx_out.burst_data), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_R", $sformatf("Single data = %h",tx_out.burst_data[i]), UVM_MEDIUM)
+        actual_item_q[tx_out.axi_req_i.ar.addr + (burst_addr_r * i)] = tx_out.burst_data[i];
+       `uvm_info("SCOREBOARD_R", $sformatf("Item Queue = %p", actual_item_q), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_R", $sformatf("Item Queue = %h", actual_item_q[tx_out.axi_req_i.ar.addr + (burst_addr_r * i)]), UVM_MEDIUM)
       end //}
     end //}	
 	
-	else if (tx_in.axi_req_i.ar.burst === 'b10) begin
-	  for (int i = 0; i <= tx_in.axi_req_i.ar.len; ++i) begin //{ 
-       `uvm_info(get_full_name(), "Burst Reading", UVM_LOW)
-       `uvm_info(get_full_name(), $sformatf("Burst data = %p", tx_out.burst_data), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Single data = %0d", tx_out.burst_data[i]), UVM_MEDIUM)
-	   `uvm_info(get_full_name(), $sformatf("Wrap boundary = 0x%0h", wrap_boundary_r), UVM_LOW)
-	    wrapping_addr_r = ((tx_in.axi_req_i.ar.addr / wrap_boundary_r) * wrap_boundary_r) +  (tx_in.axi_req_i.ar.addr + ((burst_addr_r * i) % wrap_boundary_r)) % wrap_boundary_r;
-	   `uvm_info(get_full_name(), $sformatf("Reading burst Addr = 0x%0h", wrapping_addr_r), UVM_LOW)
+	else if (tx_out.axi_req_i.ar.burst === 'b10) begin
+	  for (int i = 0; i <= tx_out.axi_req_i.ar.len; ++i) begin //{ 
+       `uvm_info("SCOREBOARD_R", "Burst Reading", UVM_LOW)
+       `uvm_info("SCOREBOARD_R", $sformatf("Burst data = %p", tx_out.burst_data), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_R", $sformatf("Single data = %0d", tx_out.burst_data[i]), UVM_MEDIUM)
+	   `uvm_info("SCOREBOARD_R", $sformatf("Wrap boundary = 0x%0h", wrap_boundary_r), UVM_LOW)
+	    wrapping_addr_r = ((tx_out.axi_req_i.ar.addr / wrap_boundary_r) * wrap_boundary_r) +  (tx_out.axi_req_i.ar.addr + ((burst_addr_r * i) % wrap_boundary_r)) % wrap_boundary_r;
+	   `uvm_info("SCOREBOARD_R", $sformatf("Reading burst Addr = 0x%0h", wrapping_addr_r), UVM_LOW)
         actual_item_q[wrapping_addr_r] = tx_out.burst_data[i];
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %p", actual_item_q), UVM_MEDIUM)
-       `uvm_info(get_full_name(), $sformatf("Item Queue = %h", actual_item_q[wrapping_addr_r]), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_R", $sformatf("Item Queue = %p", actual_item_q), UVM_MEDIUM)
+       `uvm_info("SCOREBOARD_R", $sformatf("Item Queue = %h", actual_item_q[wrapping_addr_r]), UVM_MEDIUM)
       end //}
     end
 
