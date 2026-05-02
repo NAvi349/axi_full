@@ -14,3 +14,19 @@ Driver address phase and data phase seperately ---> to properly implement burst 
 Drop valid as soon as ready is asserted from the slave. Otherwise duplicate drives will be there --> This caused beat mismatch
 
 In monitor with input and output monitor, don't mix the signals from one monitor to other as it will create race condition.
+
+
+Wrapping bursts
+
+1. Unaligned start address:
+
+beat_size     = 1 << aw.size;
+wrap_boundary = (aw.len + 1) * beat_size;
+aligned_start = (aw.addr / wrap_boundary) * wrap_boundary;
+offset        = aw.addr % wrap_boundary;
+
+addr[i] = aligned_start + ((offset + i * beat_size) % wrap_boundary);
+
+
+wrap boundary is beat size * burst len
+
