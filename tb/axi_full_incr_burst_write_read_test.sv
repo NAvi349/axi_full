@@ -1,5 +1,5 @@
 /**********************************************/
-/* Testname: axi_lite_write_read_test
+/* Testname: axi_full_write_read_test
 /* Description: This is a write and read operation testcase for AXI-Lite enviroment.
 /**********************************************/
 `include "uvm_macros.svh"
