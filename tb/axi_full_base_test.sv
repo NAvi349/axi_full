@@ -4,7 +4,7 @@ import uvm_pkg::*;
 import axi_full_uvm_pkg::*;
 /**********************************************/
 /* Testname: axi_full_base_test
-/* Description: This is a base testcase for AXI-Lite enviroment.
+/* Description: This is a base testcase for AXI4 enviroment.
 /**********************************************/
 
 
