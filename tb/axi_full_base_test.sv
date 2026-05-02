@@ -23,11 +23,9 @@ class axi_full_base_test extends uvm_test;
   endfunction: build_phase
 
   task run_phase(uvm_phase phase);
-    phase.raise_objection(this);
-
-
-	phase.drop_objection(this);
-
+    //phase.raise_objection(this);
+	  //phase.drop_objection(this); 
+	// not needed if there is no stimulus
   endtask: run_phase
 
   function void end_of_elaboration_phase (uvm_phase phase);
