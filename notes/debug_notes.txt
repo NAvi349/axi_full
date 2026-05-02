@@ -1,0 +1,16 @@
+For Multi-ID maintain queues in monitor.
+
+
+For AW, put into queues.
+
+When corresponding W data is received for that ID, combine them together and send to DUT.
+
+
+
+Use disable fork in join any fork in scoreboard to prevent any un-intended behaviour.
+
+For example, in read and write transaction monitor connections to scoreboard, I used join any fork to proceed with whichever transaction
+
+
+In monitor, use seperate monitor for read and write don't mix --> if you mix you have to synchronize. 
+This became apparent when implementing multi-id. Instead use queues
