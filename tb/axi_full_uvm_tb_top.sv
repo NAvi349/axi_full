@@ -143,8 +143,6 @@ module axi_full_uvm_tb_top;
 	 	// clock generation
 	 	forever #5ns clock = ~clock;
 
-		#15ns;
-		$finish;
 	 end
 
   // VCD dump 
