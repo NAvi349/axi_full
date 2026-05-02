@@ -19,12 +19,14 @@ Testbench info
 
 Wrapping burst 'b10:
 
-First part: ((addr / wrap_boundary) * wrap_boundary) → aligns the base address to the nearest boundary. 
-Second part: (addr + offset) % wrap_boundary → calculates the wrapped offset inside that boundary.
-Together: They give the correct wrapped address for each beat.
-Example:
-    Suppose:
+First part: ((addr / wrap_boundary) * wrap_boundary) → aligns the base address to the nearest boundary.
 
+Second part: (addr + offset) % wrap_boundary → calculates the wrapped offset inside that boundary.
+
+Together: They give the correct wrapped address for each beat.
+
+Example:
+   
         wrap_boundary = 16
 
         addr = 20
