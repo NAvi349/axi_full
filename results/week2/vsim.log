@@ -1,6 +1,3 @@
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(277) @ 0: reporter [Questa UVM] QUESTA_UVM-1.2.3
-# UVM_INFO verilog_src/questa_uvm_pkg-1.2/src/questa_uvm_pkg.sv(278) @ 0: reporter [Questa UVM]  questa_uvm::init(+struct)
-# UVM_INFO @ 0: reporter [RNTST] Running test axi_lite_write_read_test...
 # UVM_INFO @ 0: reporter [UVMTOP] UVM testbench topology:
 # ------------------------------------------------------------------
 # Name                       Type                        Size  Value
@@ -115,7 +112,3 @@
 # [UVMTOP]     1
 # [uvm_test_top.axi_env_0.axi_agent_0.axi_driver_0]     4
 # [uvm_test_top.axi_env_0.axi_agent_0.axi_sequencer_0.axi_wr_rd_seq]     2
-# ** Note: $finish    : /pkg/modeltech-2024.3/linux/../verilog_src/uvm-1.1d/src/base/uvm_root.svh(430)
-#    Time: 65 ns  Iteration: 62  Instance: /axi_lite_uvm_tb_top
-# End time: 22:39:12 on Dec 21,2025, Elapsed time: 0:00:14
-# Errors: 0, Warnings: 1
