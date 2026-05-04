@@ -43,7 +43,6 @@
 # [225000] Posedge of Clk
 # [235000] Posedge of Clk
 # [245000] Posedge of Clk
-# ** Note: $finish    : /home/users/i77031/Work/AXI_adv/tb/axi_lite_regs_top.sv(181)
-#    Time: 255 ns  Iteration: 0  Instance: /axi_lite_regs_tb_top/u_axi_lite_regs_top
-# End time: 22:17:44 on Dec 08,2025, Elapsed time: 0:00:10
-# Errors: 0, Warnings: 0
+
+Elapsed time: 0:00:10
+
