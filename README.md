@@ -1,69 +1,81 @@
 # axi_full
-This repo contains a fully fledged UVM testbench for the verification of AXI4 protocol standard with support for burst verification.
 
-**Design:** AXI4 slave memory
-**Testbench:** AXI4 master generates and drives AXI4 transactions 
+This repo contains a fully fledged **UVM testbench** for the verification of the **AXI4 protocol standard** with support for **burst verification**.
 
-Design
+- **Design:** AXI4 slave memory
+- **Testbench:** AXI4 master generates and drives AXI4 transactions
 
-Design is axi_sim_mem from pulp axi platform. It is a behavioural mem array model acting as AXI slave.
-It responds to AXI transactions from testbench
-Some inouts:
-- Clock input
-- RST_N input
-- Input axi_req - AXI Request Channel (AW, W, AR)
-- Output axi_resp - AXI Response Channel (B, R)
-- Other Internal debug signals
-  
-Testbench info
+---
 
-Wrapping burst 'b10:
+## Design
 
-First part: ((addr / wrap_boundary) * wrap_boundary) → aligns the base address to the nearest boundary.
+The design under test (DUT) is [`axi_sim_mem`](https://github.com/pulp-platform/axi) from the **PULP AXI platform**. It is a behavioral memory array model acting as an **AXI slave** that responds to AXI transactions issued by the testbench.
 
-Second part: (addr + offset) % wrap_boundary → calculates the wrapped offset inside that boundary.
+### Ports / Signals
 
-Together: They give the correct wrapped address for each beat.
+| Signal | Direction | Description |
+|--------|-----------|-------------|
+| `clk` | Input | Clock input |
+| `rst_n` | Input | Active-low reset |
+| `axi_req` | Input | AXI Request Channel (`AW`, `W`, `AR`) |
+| `axi_resp` | Output | AXI Response Channel (`B`, `R`) |
+| *Misc* | — | Other internal debug signals |
 
-Example:
-   
-        wrap_boundary = 16
+---
 
-        addr = 20
+## Testbench Info
 
-        burst_addr = 4
+### Wrapping Burst (`BURST = 2'b10`)
 
-    For i = 0:
+For wrapping bursts, the address calculation per beat consists of two parts:
 
-        Offset = (4 * 0) % 16 = 0
+1. **Base alignment:**
+   ```
+   (addr / wrap_boundary) * wrap_boundary
+   ```
+   → Aligns the base address to the nearest wrap boundary.
 
-        Wrapped = (20 + 0) % 16 = 4
+2. **Wrapped offset:**
+   ```
+   (addr + offset) % wrap_boundary
+   ```
+   → Calculates the wrapped offset inside that boundary.
 
-        Final = (20/16)*16 + 4 = 16 + 4 = 20
+Together, they produce the **correct wrapped address** for each beat in the burst.
 
-    For i = 1:
+---
 
-        Offset = (4 * 1) % 16 = 4
+### Example
 
-        Wrapped = (20 + 4) % 16 = 8
+Given:
 
-        Final = 16 + 8 = 24
+```text
+wrap_boundary = 16
+addr          = 20
+burst_addr    = 4
+```
 
-    For i = 2:
+| Beat `i` | Offset = `(4*i) % 16` | Wrapped = `(20 + offset) % 16` | Final Address |
+|:--------:|:---------------------:|:------------------------------:|:-------------:|
+| 0        | 0                     | 4                              | `(20/16)*16 + 4 = 20` |
+| 1        | 4                     | 8                              | `16 + 8 = 24` |
+| 2        | 8                     | 12                             | `16 + 12 = 28` |
+| 3        | 12                    | 0  *(wrapped!)*                | `16 + 0 = 16` |
 
-        Offset = (4 * 2) % 16 = 8
+So the burst addresses progress as:
 
-        Wrapped = (20 + 8) % 16 = 12
+```
+20 → 24 → 28 → 16 → …
+```
 
-        Final = 16 + 12 = 28
+…and continue **wrapping around** the boundary.
 
-    For i = 3:
+---
 
-        Offset = (4 * 3) % 16 = 12
+## Features
 
-        Wrapped = (20 + 12) % 16 = 0 (wrapped back!)
-
-        Final = 16 + 0 = 16
-
-So the burst addresses go: 20, 24, 28, 16… and keep wrapping around.
-
+- Full UVM-compliant testbench architecture
+- Support for **FIXED**, **INCR**, and **WRAP** burst types
+- Configurable address/data width.
+- Burst-level transaction verification.
+- Out of order support for transactions with different ID.
